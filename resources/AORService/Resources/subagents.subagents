@@ -1,0 +1,48 @@
+## GENERAL SETTINGS
+
+# the port that the service listens on
+Service.Port		= 51001
+#Service.Port		= 41001
+
+# the default port that the subagent listens on
+Hardware.DefaultPort    = 41001
+
+
+# the address of the backup server
+Backup.Address		= localhost:41000
+Backup.Login		= aor
+Backup.Password		= aorpassword
+
+## SUBAGENTS
+
+# list of hardware subagents, comma-delimited
+Hardware.Subagents      = bee2_1
+#,bee2_2
+#,bee2_test
+
+# each entry below pertains to one of the hardware subagents
+
+# bee2_1
+
+# address of the server; may optionally specify port with :portnumber.
+# If port number isn't specified, Hardware.DefaultPort is used.
+#bee2_1.Address          = 192.168.157.128
+bee2_1.Address          = 127.0.0.1
+
+
+# the WS will only attempt to connect to the subagent if .Connect is
+# set to true
+bee2_1.Connect		= true 
+
+# not used for now
+bee2_1.Type             = default
+
+# bee2_2
+#bee2_2.Address		= 192.168.1.104
+#bee2_2.Connect		= false
+#bee2_2.Type		= default
+
+#bee2_test
+#bee2_test.Address	= 192.168.1.61
+#bee2_test.Connect	= true
+#bee2_test.Type		= default
