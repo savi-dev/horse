@@ -3,7 +3,6 @@ package ca.savi.horse.hardware;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigInteger;
@@ -12,6 +11,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.SocketException;
+import java.net.URI;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
@@ -31,6 +31,8 @@ import java.util.TimerTask;
 import java.util.UUID;
 import java.util.zip.CRC32;
 
+import javax.ws.rs.core.UriBuilder;
+
 import ca.savi.aor.hardware.BroadcastListener;
 import ca.savi.aor.hardware.HardwareNode;
 import ca.savi.aor.hardware.HardwareUnit;
@@ -39,6 +41,9 @@ import ca.savi.aor.hardware.Message;
 import ca.savi.aor.hardware.MessageFactory;
 import ca.savi.aor.hardware.Node;
 import ca.savi.aor.messageexceptions.GenericException;
+import ca.savi.glance.client.GlanceClient;
+import ca.savi.glance.model.GlanceClientDownloadRequest;
+import ca.savi.glance.model.GlanceClientDownloadResponse;
 import ca.savi.horse.model.Hwnode;
 import ca.savi.horse.model.hardware.AddVlanRequest;
 import ca.savi.horse.model.hardware.AddVlanResponse;
@@ -66,6 +71,7 @@ import ca.savi.horse.model.hardware.UserRegisterInteractionResponse;
 /**
  * This is AORHardware.
  * @author Hesam, Rahimi Koopayi <hesam.rahimikoopayi@utoronto.ca>
+ * @author Jie Yu Lin (Eric) <jieyu.lin@mail.utoronto.ca>
  * @version 0.1
  */
 public class AORHardware {
@@ -224,7 +230,7 @@ public class AORHardware {
     tr.scheduleAtFixedRate(new TimerTask() { // overload TimerTask to run the
                                              // cleanResources method
           public void run() {
-            resetUnresponsiveNodes();
+            // resetUnresponsiveNodes();
           }
         }, 60000, // start after 60000 milliseconds
         60000); // period is 60000 milliseconds
@@ -671,9 +677,11 @@ public class AORHardware {
         r[i].rank += 4;
         for (int j = 0; j < lhu.get(i).icNode.length; j++)
           if (lhu.get(i).getNodeFromUUID(lhu.get(i).icNode[j].link[0]).inUse
-              || lhu.get(i).getNodeFromUUID(lhu.get(i).icNode[j].link[0]).acquired
+              || lhu.get(i).getNodeFromUUID(
+                  lhu.get(i).icNode[j].link[0]).acquired
               || lhu.get(i).getNodeFromUUID(lhu.get(i).icNode[j].link[1]).inUse
-              || lhu.get(i).getNodeFromUUID(lhu.get(i).icNode[j].link[1]).acquired)
+              || lhu.get(i).getNodeFromUUID(
+                  lhu.get(i).icNode[j].link[1]).acquired)
             r[i].rank--;
         // unset the assignment
         for (HardwareNode n : hns)
@@ -772,23 +780,72 @@ public class AORHardware {
     UUID uuid;
     HardwareUnit u = null;
     HardwareNode n = null;
-    File f;
     FileInputStream fin;
+    File f;
     Socket tcps;
     OutputStream o;
     byte[] buf = new byte[1024];
     r.setSuccessful(false);
     int readlen = 0, tcpport = 0;
+    // Get image from Glance
+    String GlanceAuthToken = "";
+    String hwUsername = "";
+    String hwPassword = "";
+    String hwTenant = "";
+    String keystoneAddress = "";
+    String GlanceServiceEndPoint = m.getServiceEndPoint();
+    rb = ResourceBundle.getBundle("AORService.Resources.properties");
+    Properties prop = new Properties();
+    // Get the username and password for accessing the images
     try {
-      // create a temporary file to write the bitstream
-      f = File.createTempFile("aorhardware", null);
-      // open the output stream
-      FileOutputStream fout = new FileOutputStream(f);
-      // write the stream
-      fout.write(m.getBitstream());
-      fout.close();
-    } catch (Exception e) {
-      r.setValue(e.getMessage());
+      prop.load(new FileInputStream(new File("resources").getAbsolutePath()
+          + File.separator + rb.getString("glanceCredFile")));
+      hwUsername = prop.getProperty("GlanceUsername");
+      hwPassword = prop.getProperty("GlancePassword");
+      hwTenant = prop.getProperty("GlanceTenant");
+      keystoneAddress = prop.getProperty("KeystoneAddress");
+    } catch (IOException e) {
+      r.setValue("Error reading properties file: " + e);
+      System.out.println("Error reading properties fie: " + e);
+      return r;
+    }
+    /*
+     * Get the token with the username and password KSDriver ksDriver =
+     * KSDriver.getInstance(); ksDriver.setCredentialEndpoint("");
+     * KSUserAuthResp ksUserAuthResp = ksDriver.authenticateUser( hwUsername,
+     * hwPassword); if (ksUserAuthResp != null){ if (ksUserAuthResp.unathorized
+     * != null){ r.setValue(
+     * "Server Error: Error validating Hardware Resource Glance user" +
+     * " Credential: " + ksUserAuthResp.unathorized.getMessage()); return r;
+     * }else{ GlanceAuthToken = ksUserAuthResp.access.getToken().getId(); }
+     * }else{ r.setValue(
+     * "Server Error: Unable to validate Harware Resource Glance user " +
+     * "credential"); return r; } Download the image and store to a temp file
+     */
+    try {
+      f = File.createTempFile("aorhardwareImage", null);
+    } catch (IOException e1) {
+      e1.printStackTrace();
+      System.out.println(e1);
+      r.setValue("Server Error: Unable to create temp file for image" + e1);
+      return r;
+    }
+    URI glance_uri = UriBuilder.fromPath(GlanceServiceEndPoint).build();
+    GlanceClient gc = new GlanceClient(glance_uri);
+    gc.GlanceCLConfigClient("/v1", GlanceAuthToken);
+    GlanceAuthToken =
+        gc.GlanceCLGetAuthToken(hwUsername, hwPassword, hwTenant,
+            keystoneAddress);
+    GlanceClientDownloadRequest gcDownloadRequest =
+        new GlanceClientDownloadRequest();
+    GlanceClientDownloadResponse gcDownloadResponse;
+    gcDownloadRequest.setUuid(m.getImageUuid());
+    gcDownloadRequest.setSaveToDisk(true);
+    gcDownloadRequest.setDownloadLocalPath(f.getParent());
+    gcDownloadRequest.setImageName(f.getName());
+    gcDownloadResponse = gc.GlanceCLDownloadImage(gcDownloadRequest);
+    if (!gcDownloadResponse.getIsSuccessful()) {
+      r.setValue(gcDownloadResponse.getError());
       return r;
     }
     // make sure the uuid isn't malformed
@@ -1323,7 +1380,8 @@ public class AORHardware {
         // found a node but it's an InterchipNode. NOT POSSIBLE!
       } else {
         r.setSuccessful(false);
-        r.setValue("Interchip does not contain read/write registers of interchip node");
+        r.setValue("Interchip does not contain read/write registers" +
+            "of interchip node");
         return r;
       }
     }

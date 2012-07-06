@@ -13,20 +13,20 @@ import ca.savi.horse.model.hwparams.AddVlanRequestParams;
 import ca.savi.horse.model.hwparams.GenericOpRequestParams;
 import ca.savi.horse.model.hwparams.GetRequestParams;
 import ca.savi.horse.model.hwparams.ListRequestParams;
-import ca.savi.horse.model.hwparams.ProgramRequestParams;
 import ca.savi.horse.model.hwparams.SetParamRequestParams;
 import ca.savi.horse.model.hwunmarshaller.UnmarshalAddVlanRequestParamsRequest;
 import ca.savi.horse.model.hwunmarshaller.UnmarshalAddVlanRequestParamsResponse;
-import ca.savi.horse.model.hwunmarshaller.UnmarshalGenericOperationRequestParamsRequest;
-import ca.savi.horse.model.hwunmarshaller.UnmarshalGenericOperationRequestParamsResponse;
+import ca.savi.horse.model.hwunmarshaller.
+UnmarshalGenericOperationRequestParamsRequest;
+import ca.savi.horse.model.hwunmarshaller.
+UnmarshalGenericOperationRequestParamsResponse;
 import ca.savi.horse.model.hwunmarshaller.UnmarshalGetRequestParamsRequest;
 import ca.savi.horse.model.hwunmarshaller.UnmarshalGetRequestParamsResponse;
 import ca.savi.horse.model.hwunmarshaller.UnmarshalListRequestParamsRequest;
 import ca.savi.horse.model.hwunmarshaller.UnmarshalListRequestParamsResponse;
-import ca.savi.horse.model.hwunmarshaller.UnmarshalProgramRequestParamsRequest;
-import ca.savi.horse.model.hwunmarshaller.UnmarshalProgramRequestParamsResponse;
 import ca.savi.horse.model.hwunmarshaller.UnmarshalSetParamRequestParamsRequest;
-import ca.savi.horse.model.hwunmarshaller.UnmarshalSetParamRequestParamsResponse;
+import ca.savi.horse.model.hwunmarshaller.
+UnmarshalSetParamRequestParamsResponse;
 
 /**
  * This is Hardware Unmarshaller.
@@ -51,30 +51,6 @@ public class HardwareUnmarshaller {
       r.setRawEthernet(params.isRawEthernet());
       return r;
     } catch (Exception ex) {
-      return null;
-    }
-  }
-
-  public UnmarshalProgramRequestParamsResponse unmarshalProgramRequestParams(
-      UnmarshalProgramRequestParamsRequest inputPart) {
-    UnmarshalProgramRequestParamsResponse r =
-        new UnmarshalProgramRequestParamsResponse();
-    try {
-      JAXBContext jc;
-      StringReader stringReader = new StringReader(inputPart.getXmlString());
-      jc = JAXBContext.newInstance(ProgramRequestParams.class);
-      Unmarshaller u = jc.createUnmarshaller();
-      ProgramRequestParams params = new ProgramRequestParams();
-      JAXBElement<ProgramRequestParams> root =
-          u.unmarshal(new StreamSource(stringReader),
-              ProgramRequestParams.class);
-      params = root.getValue();
-      r.setBitstream(params.getBitstream());
-      r.setIsAce(params.isIsAce());
-      System.out.println("unmarshalling program request successfull");
-      return r;
-    } catch (Exception ex) {
-      System.out.println("unmarshalling program request UN successfull");
       return null;
     }
   }

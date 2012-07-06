@@ -21,15 +21,17 @@ import javax.xml.bind.annotation.XmlType;
  * <p>
  * The following schema fragment specifies the expected content contained within
  * this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;all>
- *         &lt;element name="bitstream" type="{http://www.w3.org/2001/XMLSchema}base64Binary"/>
+ *         &lt;element name="bitstream"
+ *         type="{http://www.w3.org/2001/XMLSchema}base64Binary"/>
  *       &lt;/all>
- *       &lt;attribute name="uuid" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="uuid"
+ *       type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -40,24 +42,26 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "programResourceRequest")
 public class ProgramResourceRequest {
   @XmlElement(required = true)
-  protected byte[] bitstream;
+  protected String imageUuid;
   @XmlAttribute(name = "uuid")
   protected String uuid;
+  @XmlElement(required = true)
+  protected String serviceEndPoint;
 
   /**
-   * Gets the value of the bitstream property.
+   * Gets the value of the imageUuid property.
    * @return possible object is byte[]
    */
-  public byte[] getBitstream() {
-    return bitstream;
+  public String getImageUuid() {
+    return imageUuid;
   }
 
   /**
-   * Sets the value of the bitstream property.
+   * Sets the value of the imageUuid property.
    * @param value allowed object is byte[]
    */
-  public void setBitstream(byte[] value) {
-    this.bitstream = ((byte[]) value);
+  public void setImageUuid(String value) {
+    this.imageUuid = value;
   }
 
   /**
@@ -74,5 +78,21 @@ public class ProgramResourceRequest {
    */
   public void setUuid(String value) {
     this.uuid = value;
+  }
+
+  /**
+   * Gets the value of the service end point
+   * @return
+   */
+  public String getServiceEndPoint() {
+    return serviceEndPoint;
+  }
+
+  /**
+   * Sets the value of the service end point
+   * @param value
+   */
+  public void setServiceEndPoint(String value) {
+    this.serviceEndPoint = value;
   }
 }

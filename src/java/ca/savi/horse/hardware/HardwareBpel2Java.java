@@ -54,58 +54,52 @@ public class HardwareBpel2Java {
   // hardwareBPEL.bpel)
   // variables
   RemoveVlanFromPortResponse removeVlanFromPortOut =
-      new RemoveVlanFromPortResponse();// = null;
+      new RemoveVlanFromPortResponse();
   RemoveVlanFromPortRequest removeVlanFromPortIn =
-      new RemoveVlanFromPortRequest();// = null;
-  ClearUUIDResponse clearUUIDOut = new ClearUUIDResponse();// = null;
-  ClearUUIDRequest clearUUIDIn = new ClearUUIDRequest();// = null;
-  AddVlanToPortResponse addVlanToPortOut = new AddVlanToPortResponse();// =
-                                                                       // null;
-  AddVlanToPortRequest addVlanToPortIn = new AddVlanToPortRequest();// = null;
-  ReleaseIPAddressResponse releaseIPAddressOut = new ReleaseIPAddressResponse();// =
-                                                                                // null;
-  ReleaseIPAddressRequest releaseIPAddressIn = new ReleaseIPAddressRequest();// =
-                                                                             // null;
-  GetIPAddressResponse getIPAddressOut = new GetIPAddressResponse();// = null;
-  GetIPAddressRequest getIPAddressIn = new GetIPAddressRequest();// = null;
+      new RemoveVlanFromPortRequest();
+  ClearUUIDResponse clearUUIDOut = new ClearUUIDResponse();
+  ClearUUIDRequest clearUUIDIn = new ClearUUIDRequest();
+  AddVlanToPortResponse addVlanToPortOut = new AddVlanToPortResponse();
+  AddVlanToPortRequest addVlanToPortIn = new AddVlanToPortRequest();
+  ReleaseIPAddressResponse releaseIPAddressOut = new ReleaseIPAddressResponse();
+  ReleaseIPAddressRequest releaseIPAddressIn = new ReleaseIPAddressRequest();
+  GetIPAddressResponse getIPAddressOut = new GetIPAddressResponse();
+  GetIPAddressRequest getIPAddressIn = new GetIPAddressRequest();
   ClearLocalIfEmptyResponse clearLocalIfEmptyOut =
-      new ClearLocalIfEmptyResponse();// = null;
-  ClearLocalIfEmptyRequest clearLocalIfEmptyIn = new ClearLocalIfEmptyRequest();// =
-                                                                                // null;
+      new ClearLocalIfEmptyResponse();
+  ClearLocalIfEmptyRequest clearLocalIfEmptyIn = new ClearLocalIfEmptyRequest();
   GetNetworkProtocolResponse getNetworkProtocolOut =
-      new GetNetworkProtocolResponse();// = null;
+      new GetNetworkProtocolResponse();
   GetNetworkProtocolRequest getNetworkProtocolIn =
-      new GetNetworkProtocolRequest();// = null;
-  CreateLocalTagResponse createLocalTagOut = new CreateLocalTagResponse();// =
-                                                                          // null;
-  CreateLocalTagRequest createLocalTagIn = new CreateLocalTagRequest();// =
-                                                                       // null;
+      new GetNetworkProtocolRequest();
+  CreateLocalTagResponse createLocalTagOut = new CreateLocalTagResponse();
+  CreateLocalTagRequest createLocalTagIn = new CreateLocalTagRequest();
   // RemoveVlanResponse removeVlanOut = null;
   // RemoveVlanRequest removeVlanIn = null;
   ca.savi.horse.model.hardware.RemoveVlanResponse internalRemoveVlanOut =
-      new ca.savi.horse.model.hardware.RemoveVlanResponse();// = null;
+      new ca.savi.horse.model.hardware.RemoveVlanResponse();
   ca.savi.horse.model.hardware.RemoveVlanRequest internalRemoveVlanIn =
-      new ca.savi.horse.model.hardware.RemoveVlanRequest();// = null;
+      new ca.savi.horse.model.hardware.RemoveVlanRequest();
   // AddVlanResponse addVlanOut = null;
   // AddVlanRequest addVlanIn = null;
   ca.savi.horse.model.hardware.AddVlanResponse internalAddVlanOut =
-      new ca.savi.horse.model.hardware.AddVlanResponse();// = null;
+      new ca.savi.horse.model.hardware.AddVlanResponse();
   ca.savi.horse.model.hardware.AddVlanRequest internalAddVlanIn =
-      new ca.savi.horse.model.hardware.AddVlanRequest();// = null;
+      new ca.savi.horse.model.hardware.AddVlanRequest();
   // UserRegisterInteractionResponse registerInteractionOut = null;
   // UserRegisterInteractionRequest registerInteractionIn = null;
-  ca.savi.horse.model.hardware.UserRegisterInteractionResponse internalRegisterInteractionOut =
-      new ca.savi.horse.model.hardware.UserRegisterInteractionResponse();// =
-                                                                         // null;
-  ca.savi.horse.model.hardware.UserRegisterInteractionRequest internalRegisterInteractionIn =
-      new ca.savi.horse.model.hardware.UserRegisterInteractionRequest();// =
-                                                                        // null;
+  ca.savi.horse.model.hardware.UserRegisterInteractionResponse
+  internalRegisterInteractionOut =
+      new ca.savi.horse.model.hardware.UserRegisterInteractionResponse();
+  ca.savi.horse.model.hardware.UserRegisterInteractionRequest
+  internalRegisterInteractionIn =
+      new ca.savi.horse.model.hardware.UserRegisterInteractionRequest();
   // ResourceResetResponse resourceResetOut = null;
   // ResourceResetRequest resourceResetIn = null;
   ca.savi.horse.model.hardware.ResourceResetResponse internalResourceResetOut =
-      new ca.savi.horse.model.hardware.ResourceResetResponse();// = null;
+      new ca.savi.horse.model.hardware.ResourceResetResponse();
   ca.savi.horse.model.hardware.ResourceResetRequest internalResourceResetIn =
-      new ca.savi.horse.model.hardware.ResourceResetRequest();// = null;
+      new ca.savi.horse.model.hardware.ResourceResetRequest();
   // StopServerResponse stopServerOut = null;
   // Object stopServerIn = null; //because in AORHardwareProcess.xsd , the type
   // of StopServerRequest is "anyType". This is the case for InitRequest and
@@ -113,36 +107,38 @@ public class HardwareBpel2Java {
   // TerminateResponse terminateOut = null;
   // Object terminateIn = null;
   ca.savi.horse.model.hardware.TerminateResponse internalTerminateOut =
-      new ca.savi.horse.model.hardware.TerminateResponse();// = null;
-  Object internalTerminateIn = new Object();// = null;
-  ca.savi.horse.model.hardware.ResourceStatusResponse internalResourceStatusOut =
-      new ca.savi.horse.model.hardware.ResourceStatusResponse();// =
-                                                                // null;
+      new ca.savi.horse.model.hardware.TerminateResponse();
+  Object internalTerminateIn = new Object();
+  ca.savi.horse.model.hardware.ResourceStatusResponse
+  internalResourceStatusOut =
+      new ca.savi.horse.model.hardware.ResourceStatusResponse();
   ca.savi.horse.model.hardware.ResourceStatusRequest internalResourceStatusIn =
-      new ca.savi.horse.model.hardware.ResourceStatusRequest();// = null;
-  ca.savi.horse.model.hardware.ProgramResourceResponse internalProgramResourceOut =
-      new ca.savi.horse.model.hardware.ProgramResourceResponse();// =
-                                                                 // null;
-  ca.savi.horse.model.hardware.ProgramResourceRequest internalProgramResourceIn =
-      new ca.savi.horse.model.hardware.ProgramResourceRequest();// =
-                                                                // null;
-  ca.savi.horse.model.hardware.ResourceReleaseResponse internalResourceReleaseOut =
-      new ca.savi.horse.model.hardware.ResourceReleaseResponse();// =
-                                                                 // null;
-  ca.savi.horse.model.hardware.ResourceReleaseRequest internalResourceReleaseIn =
-      new ca.savi.horse.model.hardware.ResourceReleaseRequest();// =
-                                                                // null;
-  ca.savi.horse.model.hardware.ResourceGetResponse internalResourceGetOut =
-      new ca.savi.horse.model.hardware.ResourceGetResponse();// = null;
+      new ca.savi.horse.model.hardware.ResourceStatusRequest();
+  ca.savi.horse.model.hardware.ProgramResourceResponse
+  internalProgramResourceOut =
+      new ca.savi.horse.model.hardware.ProgramResourceResponse();
+  ca.savi.horse.model.hardware.ProgramResourceRequest
+  internalProgramResourceIn =
+      new ca.savi.horse.model.hardware.ProgramResourceRequest();
+  ca.savi.horse.model.hardware.ResourceReleaseResponse
+  internalResourceReleaseOut =
+      new ca.savi.horse.model.hardware.ResourceReleaseResponse();
+  ca.savi.horse.model.hardware.ResourceReleaseRequest
+  internalResourceReleaseIn =
+      new ca.savi.horse.model.hardware.ResourceReleaseRequest();
+  ca.savi.horse.model.hardware.ResourceGetResponse
+  internalResourceGetOut =
+      new ca.savi.horse.model.hardware.ResourceGetResponse();
   ca.savi.horse.model.hardware.ResourceGetRequest internalResourceGetIn =
-      new ca.savi.horse.model.hardware.ResourceGetRequest();// = null;
-  ca.savi.horse.model.hardware.ResourceListResponse internalResourceListOut =
-      new ca.savi.horse.model.hardware.ResourceListResponse();// = null;
+      new ca.savi.horse.model.hardware.ResourceGetRequest();
+  ca.savi.horse.model.hardware.ResourceListResponse
+  internalResourceListOut =
+      new ca.savi.horse.model.hardware.ResourceListResponse();
   ca.savi.horse.model.hardware.ResourceListRequest internalResourceListIn =
-      new ca.savi.horse.model.hardware.ResourceListRequest();// = null;
+      new ca.savi.horse.model.hardware.ResourceListRequest();
   ca.savi.horse.model.hardware.InitResponse internalInitOut =
-      new ca.savi.horse.model.hardware.InitResponse();// = null;
-  Object internalInitIn = new Object();// = null;
+      new ca.savi.horse.model.hardware.InitResponse();
+  Object internalInitIn = new Object();
 
   public HardwareBpel2Java() {
     aorHardware = new AORHardware();
@@ -317,8 +313,10 @@ public class HardwareBpel2Java {
       ProgramResourceRequest programResourceIn) {
     ProgramResourceResponse programResourceOut = new ProgramResourceResponse();
     // Assign9
-    internalProgramResourceIn.setBitstream(programResourceIn.getBitstream());
+    internalProgramResourceIn.setImageUuid(programResourceIn.getImageUuid());
     internalProgramResourceIn.setUuid(programResourceIn.getUuid());
+    internalProgramResourceIn.setServiceEndPoint(programResourceIn
+        .getServiceEndPoint());
     internalProgramResourceOut =
         aorHardware.programResource(internalProgramResourceIn);
     // Assign10
@@ -431,7 +429,8 @@ public class HardwareBpel2Java {
       clearLocalIfEmptyIn.setQinQTag(addVlanIn.getQinQTag());
       addVlanOut.setSuccessful(Boolean.FALSE);
       addVlanOut
-          .setValue("Specified Network protocol does not match current value for that Q in Q tag");
+          .setValue("Specified Network protocol does not match" +
+              "current value for that Q in Q tag");
       clearLocalIfEmptyOut = clearLocalIfEmpty(clearLocalIfEmptyIn);
       // clearLocalIfEmptyOut =
       // aorFabric.clearLocalIfEmpty(clearLocalIfEmptyIn);

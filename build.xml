@@ -26,6 +26,7 @@
     <property name="COBRA_HOME" value="../cobra/" />
     <property name="FINCH_HOME" value="../finch/" />
     <property name="FRONT_HOME" value="../front/" />
+  <property name="GRIFFIN_HOME" value="../griffin/" />
 
     <property name="BUILD_DIR" value="${PROJECT_HOME}/build/" />
     <property name="CLASSES_DIR" value="${PROJECT_HOME}/build/classes/" />
@@ -41,6 +42,8 @@
     <property name="FINCH_DIST_DIR" value="${FINCH_HOME}/dist/" />
     <property name="FRONT_LIB_DIR" value="${FRONT_HOME}/build/lib/" />
     <property name="FRONT_DIST_DIR" value="${FRONT_HOME}/dist/" />
+    <property name="GRIFFIN_LIB_DIR" value="${GRIFFIN_HOME}/build/lib/" />
+    <property name="GRIFFIN_DIST_DIR" value="${GRIFFIN_HOME}/dist/" />
     <property name="RESOURCES_DIR" value="resources/" />
     <property name="SRC_DIR" value="${PROJECT_HOME}/src/java/" />
     <property name="SRC_TEST_DIR" value="${PROJECT_HOME}/test/java/" />
@@ -56,6 +59,8 @@
         <fileset dir="${FINCH_DIST_DIR}" includes="*.jar" />
         <fileset dir="${FRONT_LIB_DIR}" includes="*.jar" />
         <fileset dir="${FRONT_DIST_DIR}" includes="*.jar" />
+        <fileset dir="${GRIFFIN_LIB_DIR}" includes="*.jar" />
+        <fileset dir="${GRIFFIN_DIST_DIR}" includes="*.jar" />
     </path>
 
     <path id="classpath.all">
@@ -77,11 +82,14 @@
             <fileset dir="${FINCH_DIST_DIR}" includes="*.jar" />
             <fileset dir="${FRONT_LIB_DIR}" includes="*.jar" />
             <fileset dir="${FRONT_DIST_DIR}" includes="*.jar" />
+            <fileset dir="${GRIFFIN_LIB_DIR}" includes="*.jar" />
+            <fileset dir="${GRIFFIN_DIST_DIR}" includes="*.jar" />
         </copy>
     </target>
 
     <target name="dist" depends="build,copyjars">
-        <war destfile="${DIST_DIR}/${PROJECT_NAME}-${VERSION}.war" webxml="${RESOURCES_DIR}/WEB-INF/web.xml">
+        <war destfile="${DIST_DIR}/${PROJECT_NAME}-${VERSION}.war"
+          webxml="${RESOURCES_DIR}/WEB-INF/web.xml">
             <classes dir="${CLASSES_DIR}" excludes="**/WEB-INF,**/WEB-INF/*" />
             <lib dir="${LIB_DIR}" excludes="**/*servlet*" />
             <webinf dir="${RESOURCES_DIR}/WEB-INF/" />
@@ -89,7 +97,8 @@
     </target>
 
     <target name="build" depends="deps">
-        <javac srcdir="${SRC_DIR}:${GEN_SRC_DIR}" includeantruntime="false" destdir="${CLASSES_DIR}" debug="${DEBUG}">
+        <javac srcdir="${SRC_DIR}:${GEN_SRC_DIR}" includeantruntime="false"
+          destdir="${CLASSES_DIR}" debug="${DEBUG}">
             <classpath refid="classpath.lib" />
         </javac>
         <copy todir="${CLASSES_DIR}">
@@ -108,14 +117,16 @@
     </target>
 
     <target name="build-test" depends="build">
-        <javac srcdir="${SRC_TEST_DIR}:${GEN_SRC_DIR}" includeantruntime="false" destdir="${CLASSES_DIR}" debug="${DEBUG}">
+        <javac srcdir="${SRC_TEST_DIR}:${GEN_SRC_DIR}" includeantruntime="false"
+          destdir="${CLASSES_DIR}" debug="${DEBUG}">
             <classpath refid="classpath.lib" />
         </javac>
     </target>
 
     <target name="deps" depends="prepare">
         <ivy:configure file="ivy-settings.xml" override="true" />
-        <ivy:retrieve refresh="true" type="jar,bundle" pattern="${LIB_DIR}/[artifact].[ext]" />
+        <ivy:retrieve refresh="true" type="jar,bundle"
+          pattern="${LIB_DIR}/[artifact].[ext]" />
     </target>
 
     <target name="prepare">
@@ -125,10 +136,16 @@
         <mkdir dir="${GEN_DIR}" />
         <mkdir dir="${GEN_SRC_DIR}" />
         <mkdir dir="${LIB_DIR}" />
-        <ant antfile="${CAMEL_HOME}/build.xml" inheritall="false" inheritrefs="false" target="distjar" />
-        <ant antfile="${COBRA_HOME}/build.xml" inheritall="false" inheritrefs="false" target="dist" />
-        <ant antfile="${FRONT_HOME}/build.xml" inheritall="false" inheritrefs="false" target="dist" />
-        <ant antfile="${FINCH_HOME}/build.xml" inheritall="false" inheritrefs="false" target="dist" />
+        <ant antfile="${CAMEL_HOME}/build.xml" inheritall="false"
+          inheritrefs="false" target="distjar" />
+        <ant antfile="${COBRA_HOME}/build.xml" inheritall="false"
+          inheritrefs="false" target="dist" />
+        <ant antfile="${FRONT_HOME}/build.xml" inheritall="false"
+          inheritrefs="false" target="dist" />
+        <ant antfile="${FINCH_HOME}/build.xml" inheritall="false"
+          inheritrefs="false" target="dist" />
+      <ant antfile="${GRIFFIN_HOME}/build.xml" inheritall="false"
+        inheritrefs="false" target="dist" />
     </target>
 
     <target name="clean">

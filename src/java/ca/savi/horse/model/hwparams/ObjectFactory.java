@@ -169,13 +169,6 @@ public class ObjectFactory {
   }
 
   /**
-   * Create an instance of {@link ProgramResponseParams }
-   */
-  public ProgramResponseParams createProgramResponseParams() {
-    return new ProgramResponseParams();
-  }
-
-  /**
    * Create an instance of {@link GetRequestParams }
    */
   public GetRequestParams createGetRequestParams() {
@@ -208,13 +201,6 @@ public class ObjectFactory {
    */
   public InitResponseParams createInitResponseParams() {
     return new InitResponseParams();
-  }
-
-  /**
-   * Create an instance of {@link ProgramRequestParams }
-   */
-  public ProgramRequestParams createProgramRequestParams() {
-    return new ProgramRequestParams();
   }
 
   /**

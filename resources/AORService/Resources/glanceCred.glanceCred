@@ -1,0 +1,4 @@
+GlanceUsername=glance
+GlancePassword=7a41025c8b89ee16e3e3
+GlanceTenant=service
+KeystoneAddress=http://10.10.10.143
