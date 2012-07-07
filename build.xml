@@ -16,6 +16,7 @@
     <property name="PROJECT_NAME" value="horse" />
     <property name="VERSION" value="0.1" />
     <property name="TEST_SUITE_CLASS" value="ca.savi.horse.test.TestSuite" />
+    <property name="MAIN_CLASS" value="ca.savi.horse.server.HorseServer" />
 
     <property name="DEBUG" value="true" />
 
@@ -26,7 +27,7 @@
     <property name="COBRA_HOME" value="../cobra/" />
     <property name="FINCH_HOME" value="../finch/" />
     <property name="FRONT_HOME" value="../front/" />
-  <property name="GRIFFIN_HOME" value="../griffin/" />
+    <property name="GRIFFIN_HOME" value="../griffin/" />
 
     <property name="BUILD_DIR" value="${PROJECT_HOME}/build/" />
     <property name="CLASSES_DIR" value="${PROJECT_HOME}/build/classes/" />
@@ -61,6 +62,7 @@
         <fileset dir="${FRONT_DIST_DIR}" includes="*.jar" />
         <fileset dir="${GRIFFIN_LIB_DIR}" includes="*.jar" />
         <fileset dir="${GRIFFIN_DIST_DIR}" includes="*.jar" />
+        <fileset dir="${GRIFFIN_HOME}/libs" includes="*.jar" />
     </path>
 
     <path id="classpath.all">
@@ -87,13 +89,29 @@
         </copy>
     </target>
 
-    <target name="dist" depends="build,copyjars">
+    <target name="distwar" depends="build,copyjars">
         <war destfile="${DIST_DIR}/${PROJECT_NAME}-${VERSION}.war"
           webxml="${RESOURCES_DIR}/WEB-INF/web.xml">
             <classes dir="${CLASSES_DIR}" excludes="**/WEB-INF,**/WEB-INF/*" />
             <lib dir="${LIB_DIR}" excludes="**/*servlet*" />
             <webinf dir="${RESOURCES_DIR}/WEB-INF/" />
         </war>
+    </target>
+
+    <target name="dist" depends="build">
+      <manifestclasspath property="lib.list"
+        jarfile="${DIST_DIR}/${PROJECT_NAME}-${VERSION}.jar">
+        <classpath refid="classpath.lib" />
+      </manifestclasspath>
+      <jar destfile="${DIST_DIR}/${PROJECT_NAME}-${VERSION}.jar">
+        <fileset dir="${CLASSES_DIR}">
+          <include name="**/*"/>
+        </fileset>
+        <manifest>
+          <attribute name="Main-Class" value="${MAIN_CLASS}" />
+          <attribute name="Class-Path" value="${lib.list}" />
+        </manifest>
+      </jar>
     </target>
 
     <target name="build" depends="deps">

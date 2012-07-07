@@ -21,8 +21,8 @@
         rev="0.8.6">
       <exclude org="org.eclipse.jetty" />
     </dependency>
-    <dependency org="com.sun.jersey" name="jersey-core" rev="1.9.1"/>
-    <dependency org="com.sun.jersey" name="jersey-json" rev="1.9.1"/>
+    <dependency org="com.sun.jersey" name="jersey-core" rev="1.12"/>
+    <dependency org="com.sun.jersey" name="jersey-json" rev="1.12"/>
     <dependency org="com.sun.jersey" name="jersey-client" rev="1.12"/>
     <dependency org="com.sun.xml.ws" name="jaxws-rt" rev="2.2.5">
       <exclude org="org.glassfish.ha" />
