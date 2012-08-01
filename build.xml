@@ -24,8 +24,6 @@
     <property name="SAVI_HOME" value="../" />
     <property name="PROJECT_HOME" value="./" />
     <property name="CAMEL_HOME" value="../camel/" />
-    <property name="COBRA_HOME" value="../cobra/" />
-    <property name="FINCH_HOME" value="../finch/" />
     <property name="FRONT_HOME" value="../front/" />
     <property name="GRIFFIN_HOME" value="../griffin/" />
 
@@ -37,10 +35,6 @@
     <property name="LIB_DIR" value="${PROJECT_HOME}/build/lib/" />
     <property name="CAMEL_LIB_DIR" value="${CAMEL_HOME}/build/lib/" />
     <property name="CAMEL_DIST_DIR" value="${CAMEL_HOME}/dist/" />
-    <property name="COBRA_LIB_DIR" value="${COBRA_HOME}/build/lib/" />
-    <property name="COBRA_DIST_DIR" value="${COBRA_HOME}/dist/" />
-    <property name="FINCH_LIB_DIR" value="${FINCH_HOME}/build/lib/" />
-    <property name="FINCH_DIST_DIR" value="${FINCH_HOME}/dist/" />
     <property name="FRONT_LIB_DIR" value="${FRONT_HOME}/build/lib/" />
     <property name="FRONT_DIST_DIR" value="${FRONT_HOME}/dist/" />
     <property name="GRIFFIN_LIB_DIR" value="${GRIFFIN_HOME}/build/lib/" />
@@ -52,12 +46,9 @@
     <!-- CLASSPATH -->
     <path id="classpath.lib">
         <fileset dir="${LIB_DIR}" includes="*.jar" />
+        <fileset dir="${PROJECT_HOME}/libs" includes="*.jar" />
         <fileset dir="${CAMEL_LIB_DIR}" includes="*.jar" />
         <fileset dir="${CAMEL_DIST_DIR}" includes="*.jar" />
-        <fileset dir="${COBRA_LIB_DIR}" includes="*.jar" />
-        <fileset dir="${COBRA_DIST_DIR}" includes="*.jar" />
-        <fileset dir="${FINCH_LIB_DIR}" includes="*.jar" />
-        <fileset dir="${FINCH_DIST_DIR}" includes="*.jar" />
         <fileset dir="${FRONT_LIB_DIR}" includes="*.jar" />
         <fileset dir="${FRONT_DIST_DIR}" includes="*.jar" />
         <fileset dir="${GRIFFIN_LIB_DIR}" includes="*.jar" />
@@ -78,10 +69,6 @@
         <copy todir="${LIB_DIR}" flatten="true">
             <fileset dir="${CAMEL_LIB_DIR}" includes="*.jar" />
             <fileset dir="${CAMEL_DIST_DIR}" includes="*.jar" />
-            <fileset dir="${COBRA_LIB_DIR}" />
-            <fileset dir="${COBRA_DIST_DIR}" />
-            <fileset dir="${FINCH_LIB_DIR}" includes="*.jar" />
-            <fileset dir="${FINCH_DIST_DIR}" includes="*.jar" />
             <fileset dir="${FRONT_LIB_DIR}" includes="*.jar" />
             <fileset dir="${FRONT_DIST_DIR}" includes="*.jar" />
             <fileset dir="${GRIFFIN_LIB_DIR}" includes="*.jar" />
@@ -156,11 +143,7 @@
         <mkdir dir="${LIB_DIR}" />
         <ant antfile="${CAMEL_HOME}/build.xml" inheritall="false"
           inheritrefs="false" target="distjar" />
-        <ant antfile="${COBRA_HOME}/build.xml" inheritall="false"
-          inheritrefs="false" target="dist" />
         <ant antfile="${FRONT_HOME}/build.xml" inheritall="false"
-          inheritrefs="false" target="dist" />
-        <ant antfile="${FINCH_HOME}/build.xml" inheritall="false"
           inheritrefs="false" target="dist" />
       <ant antfile="${GRIFFIN_HOME}/build.xml" inheritall="false"
         inheritrefs="false" target="dist" />
